@@ -1,6 +1,6 @@
-# ${1:Project Name}
+## WMS Search GEO DAB API
 
-A web tool to search for Web Mapping Services (WMS) inside the GEO DAB API (http://www.geodab.net)
+A web tool to search for Web Mapping Services (WMS) inside the GEO Discovery Access Broker API (http://www.geodab.net)
 
 ## Getting Started
 
@@ -89,11 +89,15 @@ These instructions based on the Javascript API will get you a copy of the projec
 Description from the official page http://www.geodab.net
 
 ```
-GEO DAB is a key component of the GEOSS Common Infrastructure (GCI), transparently connecting GEOSS User’s requests to the resources shared by the GEOSS Providers.
+GEO DAB is a key component of the GEOSS Common Infrastructure (GCI), transparently connecting GEOSS User’s 
+requests to the resources shared by the GEOSS Providers.
 
-GEO DAB scope is to simplify cross and multi-disciplinary discovery, access, and use (or reuse) of disparate data and information.
+GEO DAB scope is to simplify cross and multi-disciplinary discovery, access, and use (or reuse) 
+of disparate data and information.
 
-GEO DAB is a brokering framework that interconnects hundreds of heterogeneous and autonomous supply systems (the enterprise systems constituting the GEO metasystem) by providing mediation, harmonization, transformation, and QoS capabilities.
+GEO DAB is a brokering framework that interconnects hundreds of heterogeneous and autonomous supply 
+systems (the enterprise systems constituting the GEO metasystem) by providing mediation, 
+harmonization, transformation, and QoS capabilities.
 ```
 
 ## Built With
