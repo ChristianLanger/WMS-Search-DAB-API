@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Search WMS in GEO DAB</title>
+    <meta name="description" content="Search Web Mapping Services in GEO Discovery Access Broker">
+		<meta name="author" content="Christian Langer">
+    
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel='stylesheet' href='css/mapbox.css'>
+    <link rel="stylesheet" href="css/leaflet.css" />
+
+    <script src="http://data.geobon.org/networks/js/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src='js/mapbox.js'></script>
+
+    <link rel="stylesheet" href="css/leaflet-sidebar.css" />
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/giapi.min.js" type="text/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <style>
+    #map {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+    }
+    
+    .icon {
+        font-size: 2.5em;
+        padding-top: 5px;
+    }
+    
+    #controls-div {
+        padding: 5px
+    }
+    
+    #search-term-input {
+        border-radius: 4px;
+        font-size: 14px;
+        padding: 10px;
+        color: #666;
+        background: #e5e5e5;
+        border: 0;
+        padding-left: 40px;
+        width: 100%;
+    }
+    
+    #headerSearch {
+        background: url(https://a-v2.sndcdn.com/assets/images/header/search-dbfe5c.svg) 0 0 no-repeat;
+        background-size: 15px 15px;
+        background-position: center;
+        width: 40px;
+        height: 40px;
+        border: 0;
+        padding: 0;
+        position: absolute;
+        z-index: 1000;
+    }
+    
+    #results-div {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        height: 50px
+    }
+    
+    #report-title-select {
+        padding: 3px;
+        display: inline-block;
+        margin-top: 10px;
+        width: 100%
+    }
+    
+    #prev-button {
+        margin-left: 25px;
+    }
+    
+    #report-title-select option {
+        max-width: 350px;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-content">
+            <div class="sidebar-pane active" id="geoapi">
+                <h1 class="sidebar-header">
+                    Search Web Mapping Services in GEO DAB
+                    <span class="sidebar-close"><i class="fa fa-caret-right"></i></span>
+                </h1>
+                <div class="sidebar-content2">
+                    <p style="line-height: 24px;font-family: 'Lato', sans-serif;font-size: 14px;">
+                        <img src="img/geodab.jpg" width="300px" title="GEOSS">
+                        <br>The GEO Discovery Access Broker (GEO DAB) is a brokering framework and a key component of the GEOSS Common Infrastructure (GCI), connecting user’s requests to the resources shared by GEOSS Providers.
+                        <br>
+                        <br> The GEO DAB applies the broker pattern, which separates users of services (clients) from providers of services (servers) by inserting an intermediary, called a broker. When a client needs a service, it queries a broker via a service interface. The broker then forwards the client's service request to a server, which processes the request. The GEO DAB presently provides broker components for discovery, access, semantics-enabled search.
+                        <br>
+                        <br>You can search and display Web Mapping Services (WMS) from the GEO DAB of the GCI that align to the EBVs framework concept.
+                        <div id="controls-div">
+                            <button id="headerSearch" type="button"></button>
+                            <input type="text" placeholder="Search for Web Mapping Services" id="search-term-input"></input>
+                            <div style="margin-top:10px">
+                                <button type="button" class="btn btn-default" id="search-button" title="Start Search">Start search</button>
+                                <button type="button" class="btn btn-default" id="prev-button" title="Prev" disabled>
+                                    << Prev</button>
+                                        <button type="button" class="btn btn-default" id="next-button" title="Next" disabled>Next >></button>
+                            </div>
+                            <div id="results-div">
+                                <div id="info-label-div">
+                                    <label id="info-label"></label>
+                                </div>
+                                <div id="select-div">
+                                    <button type="button" class="btn btn-default" id="add-layer-button" title="Add Layer" disabled>Add Layer to map</button>
+                                    <select id="report-title-select" class="form-control"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="map" class="sidebar-map"></div>
+    <script src="js/leaflet-sidebar.js"></script>
+    <script>
+var map = L.map('map', {
+    maxZoom: 17,
+    zoomControl: false,
+    attributionControl: false
+}).setView([24.278952, 56.448315], 2);
+
+var mapgrey = L.tileLayer('http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+    attribution: ''
+}).addTo(map);
+
+var layerSwitcher = L.control.layers({}, null, {
+    collapsed: false,
+    position: 'topleft'
+}).addTo(map);
+
+
+map.addControl(L.control.zoom({
+    position: 'topright'
+}));
+
+
+L.mapbox.accessToken = 'pk.eyJ1IjoiY2hyaXN0aWFubGFuZ2VyIiwiYSI6InJOMFAxS00ifQ.tt_H4EfT3ccRSPrkD0KKRQ';
+map.addControl(L.mapbox.geocoderControl('mapbox.places', {
+    autocomplete: true,
+    position: 'topright'
+}));
+
+
+
+var sidebar = L.control.sidebar('sidebar', {
+    position: 'right'
+}).addTo(map);
+
+
+
+$(document).ready(function() {
+
+
+    var dab = GIAPI.DAB('http://test.geodab.org/gi-cat-StP', 'va7f5fda88262459b8a4ff1ba584707cb');
+
+
+    var paginator;
+
+
+    var overlays = {
+
+    };
+
+    overlaysGroup = L.layerGroup().addTo(map);
+
+
+
+    var beforeSeach = function(msg) {
+
+
+        overlaysGroup.clearLayers();
+
+
+
+        jQuery('#report-title-select').empty();
+        jQuery('#add-layer-button').attr('disabled', 'disabled');
+        jQuery('#search-button').attr('disabled', 'disabled');
+        jQuery('#prev-button').attr('disabled', 'disabled');
+        jQuery('#next-button').attr('disabled', 'disabled');
+
+        jQuery('#info-label').html(msg);
+    };
+
+
+    var afterSearch = function(resultSet, paginator) {
+
+        var info = 'Matched results:<b> ' + resultSet.size + '</b>';
+
+        jQuery('#search-button').removeAttr('disabled');
+
+        if (resultSet.size) {
+
+            info += ' - Showing results ' + resultSet.start + ' to ' + (resultSet.start + resultSet.pageSize - 1);
+
+            jQuery('#add-layer-button').removeAttr('disabled');
+
+            if (paginator.prev()) {
+                jQuery('#prev-button').removeAttr('disabled');
+            }
+
+            if (paginator.next()) {
+                jQuery('#next-button').removeAttr('disabled');
+            }
+        }
+
+        jQuery('#info-label').html(info);
+
+
+    };
+
+
+    $('#search-button').click(function() {
+
+        beforeSeach('Searching GEO DAB, please wait ...');
+
+        var searchTerm = $('#search-term-input').val();
+        var constraints = {};
+
+        if (searchTerm) {
+            constraints.what = searchTerm;
+        }
+
+
+        var options = {
+            "pageSize": 25
+        };
+
+        dab.discover(onResponse, constraints, options);
+
+    });
+
+
+
+    $('#headerSearch').click(function() {
+
+        beforeSeach('Searching GEO DAB, please wait ...');
+
+        var searchTerm = $('#search-term-input').val();
+        var constraints = {};
+
+        if (searchTerm) {
+            constraints.what = searchTerm;
+        }
+
+
+        var options = {
+            "pageSize": 25
+        };
+
+        dab.discover(onResponse, constraints, options);
+
+    });
+
+
+    $('#prev-button').click(function() {
+
+        beforeSeach('Getting previous results, please wait ...');
+        paginator.prev(onResponse, true);
+    });
+
+
+    $('#next-button').click(function() {
+
+        beforeSeach('Getting next results, please wait ...');
+        paginator.next(onResponse, true);
+    });
+
+
+    $('#add-layer-button').click(function() {
+
+        var selectedIndex = $('#report-title-select').val();
+
+        var layer = overlays[selectedIndex];
+
+        overlaysGroup.addLayer(layer);
+
+
+        layerSwitcher.addOverlay(layer, layer.wmsParams.layers);
+
+
+    });
+
+
+    var onResponse = function(response) {
+
+
+        var resultSet = response[0];
+
+        if (resultSet.error) {
+            console.log("Error occurred: " + resultSet.error);
+            return;
+        }
+
+
+        paginator = resultSet.paginator;
+
+        afterSearch(resultSet, paginator);
+
+
+        var page = paginator.page();
+
+
+        overlays = [];
+
+        while (page.hasNext()) {
+
+
+            var node = page.next();
+
+
+            var report = node.report();
+
+            jQuery('#report-title-select').append('<option value="' + overlays.length + '">' + report.title + '</option>');
+
+
+            var url = report.online[0].url;
+            var name = report.online[0].name;
+
+
+
+            var layer = L.tileLayer.wms(url, {
+                format: 'image/png',
+                transparent: true,
+                layers: name,
+                zIndex: 1020,
+                title: name
+            });
+
+
+
+            overlays.push(layer);
+
+        }
+
+
+    };
+});
+</script>
+
+</body>
+
+</html>
