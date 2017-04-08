@@ -84,7 +84,7 @@ These instructions based on the Javascript API will get you a copy of the projec
 
 ```
 
-### What is the GEO DAB
+## What is the GEO DAB
 
 Description from the official page http://www.geodab.net
 
