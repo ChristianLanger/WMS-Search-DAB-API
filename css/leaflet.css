@@ -135,10 +135,13 @@
 	}
 	
 	}
-@media (max-width: 770px) {
+@media (max-width: 767px) {
 .leaflet-right .leaflet-control {
-    margin-right: 430px;
+    margin-right: 290px;
 }	
+.leaflet-left{
+	display:none;
+};
 }
 .leaflet-control-layers-overlays::before {
     content: "WMS Overlays";

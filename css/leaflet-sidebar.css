@@ -21,6 +21,9 @@
   @media (min-width: 1200px) {
     .sidebar {
       width: 460px; } }
+  @media (max-width: 767px) {
+    .sidebar {
+      width: 320px !important; } }
 
 .sidebar-left {
   left: 0; }

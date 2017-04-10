@@ -424,7 +424,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     display: block;
-    width: 100%;
+    width: 100% !important;
     font-size: 12px;
     line-height: 26px;
     text-align: left;
