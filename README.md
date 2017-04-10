@@ -1,6 +1,6 @@
 ## WMS Search GEO DAB API
 
-A web tool to search for Web Mapping Services (WMS) inside the GEO Discovery Access Broker API (http://www.geodab.net)
+A web tool to search for Web Mapping Services (WMS) from the GEO Discovery Access Broker (GEO DAB) by using the DAB Javascript API (http://www.geodab.net)
 
 ## Getting Started
 
