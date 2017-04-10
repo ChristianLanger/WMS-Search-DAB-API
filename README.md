@@ -104,7 +104,7 @@ harmonization, transformation, and QoS capabilities.
 
 * [GEO DAB API](http://api.eurogeoss-broker.eu/docs/index.html) - DAB Javascript API
 * [Leaflet JS](http://leafletjs.com/) - Leaflet JS
-* [Mapbox JS API](https://www.mapbox.com/mapbox-gl-js/example/mapbox-gl-geocoder/) - Mapbox Geocoder API
+* [Mapbox JS API](https://www.mapbox.com/mapbox-gl-js/example/mapbox-gl-geocoder/) - Mapbox Geocoding API
 * [Bootstrap](http://getbootstrap.com/) - HTML, CSS, JS web framework
 
 ## Demo
