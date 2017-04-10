@@ -84,7 +84,7 @@ These instructions based on the Javascript API will get you a copy of the projec
 
 ```
 
-### What is the GEO DAB
+## What is the GEO DAB
 
 Description from the official page http://www.geodab.net
 
@@ -104,10 +104,10 @@ harmonization, transformation, and QoS capabilities.
 
 * [GEO DAB API](http://api.eurogeoss-broker.eu/docs/index.html) - DAB Javascript API
 * [Leaflet JS](http://leafletjs.com/) - Leaflet JS
-* [Mapbox JS API](https://www.mapbox.com/mapbox-gl-js/api/#geolocatecontrol) - Mapbox Geolocate API
+* [Mapbox JS API](https://www.mapbox.com/mapbox-gl-js/example/mapbox-gl-geocoder/) - Mapbox Geocoding API
 * [Bootstrap](http://getbootstrap.com/) - HTML, CSS, JS web framework
 
 ## Demo
 
-Please see a [Demo](http://rawgit.com/ChristianLanger/WMS-Search-DAB-API/master/index.html) for details
+See a [Demo](http://rawgit.com/ChristianLanger/WMS-Search-DAB-API/master/index.html) for details
 
