@@ -170,8 +170,12 @@ var sidebar = L.control.sidebar('sidebar', {
 
 $(document).ready(function() {
 
+    // Test API 529 results
+    //var dab = GIAPI.DAB('http://test.geodab.org/gi-cat-StP', 'va7f5fda88262459b8a4ff1ba584707cb');
 
-    var dab = GIAPI.DAB('http://test.geodab.org/gi-cat-StP', 'va7f5fda88262459b8a4ff1ba584707cb');
+    // Production API 25.225.230 results
+    var dab = GIAPI.DAB('http://api.eurogeoss-broker.eu/dab');
+    
 
 
     var paginator;
