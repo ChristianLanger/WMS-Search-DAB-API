@@ -1,6 +1,6 @@
 ## WMS Search GEO DAB API
 
-web app to search for Web Mapping Services (WMS) from the GEO Discovery Access Broker (GEO DAB) by using the DAB Javascript API (http://www.geodab.net)
+Web app to search for Web Mapping Services (WMS) from the GEO Discovery Access Broker (GEO DAB) by using the DAB Javascript API (http://www.geodab.net)
 
 ## Getting Started
 
