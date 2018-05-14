@@ -109,5 +109,5 @@ harmonization, transformation, and QoS capabilities.
 
 ## Demo
 
-See a [Demo](http://rawgit.com/ChristianLanger/WMS-Search-DAB-API/master/index.html) for details
+See a [Demo](https://cdn.rawgit.com/ChristianLanger/WMS-Search-GEO-DAB-API/3ce09598/index.html) for details
 
