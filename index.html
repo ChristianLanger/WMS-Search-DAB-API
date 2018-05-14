@@ -15,7 +15,7 @@
 
     <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
 
     <script src='js/mapbox.js'></script>
 
@@ -197,13 +197,13 @@ $(document).ready(function() {
 
 
 
-        jQuery('#report-title-select').empty();
-        jQuery('#add-layer-button').attr('disabled', 'disabled');
-        jQuery('#search-button').attr('disabled', 'disabled');
-        jQuery('#prev-button').attr('disabled', 'disabled');
-        jQuery('#next-button').attr('disabled', 'disabled');
+        $('#report-title-select').empty();
+        $('#add-layer-button').attr('disabled', 'disabled');
+        $('#search-button').attr('disabled', 'disabled');
+        $('#prev-button').attr('disabled', 'disabled');
+        $('#next-button').attr('disabled', 'disabled');
 
-        jQuery('#info-label').html(msg);
+        $('#info-label').html(msg);
     };
 
 
@@ -211,24 +211,24 @@ $(document).ready(function() {
 
         var info = 'Matched results:<b> ' + resultSet.size + '</b>';
 
-        jQuery('#search-button').removeAttr('disabled');
+        $('#search-button').removeAttr('disabled');
 
         if (resultSet.size) {
 
             info += ' - Showing results ' + resultSet.start + ' to ' + (resultSet.start + resultSet.pageSize - 1);
 
-            jQuery('#add-layer-button').removeAttr('disabled');
+            $('#add-layer-button').removeAttr('disabled');
 
             if (paginator.prev()) {
-                jQuery('#prev-button').removeAttr('disabled');
+                $('#prev-button').removeAttr('disabled');
             }
 
             if (paginator.next()) {
-                jQuery('#next-button').removeAttr('disabled');
+                $('#next-button').removeAttr('disabled');
             }
         }
 
-        jQuery('#info-label').html(info);
+        $('#info-label').html(info);
 
 
     };
@@ -335,7 +335,7 @@ $(document).ready(function() {
 
             var report = node.report();
 
-            jQuery('#report-title-select').append('<option value="' + overlays.length + '">' + report.title + '</option>');
+            $('#report-title-select').append('<option value="' + overlays.length + '">' + report.title + '</option>');
 
 
             var url = report.online[0].url;
